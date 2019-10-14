@@ -1,7 +1,10 @@
 /* eslint-disable */
 import axios from 'axios'
 
-import {VALIDATE_URL, TOKEN}  from './../../../../config/dev.env.js'
+// import {VALIDATE_URL, TOKEN}  from './../../../../config/dev.env.js'
+
+const VALIDATE_URL = "http://localhost:8000/api/validate/"
+const TOKEN = "8ebb5a54048458a8bd73da259391a092c6627f1d" //"d88812ee582e2ab6bb0cdd93faa600541a2bcb39"
 
 // console.log(VALIDATE_URL, TOKEN)
 
@@ -10,6 +13,7 @@ const state = {
     answer: [],
     file: '',
     result: [],
+    question_no: undefined
 };
 
 const mutations = {
@@ -40,6 +44,8 @@ const mutations = {
 
 const actions = {
     showQuestion({commit}, question) {
+        this.state.content.result = []
+        this.state.content.answer = []
         commit('UPDATE_QUESTION', question)
     },
     
@@ -59,34 +65,29 @@ const actions = {
             },
             data:{
                 answer: answer
-            }
+            },
+            timeout: 2500
         })
         .then((response) => {
             if(this.getters.question.type === 'code') {
                 if(response.data.status === 'running') {
-                    setTimeout(() => {
-                        axios({
-                            method: 'get',
-                            url: VALIDATE_URL + response.data.uid + "/",
-                            headers: {
-                                Authorization: 'Token' + TOKEN,
-                            }
-                        })
-                        .then((response) => {
-                            // console.log(response)
-                            // console.log(this.getters.result)
-                            const result = JSON.parse(response.data.result)
-                            console.log(result.error)
-                            state.commit('UPDATE_RESPONSE_RESULT', result)
-                        })
-                    }, 1500)
+                    axios({
+                        method: 'get',
+                        url: VALIDATE_URL + response.data.uid + "/",
+                        headers: {
+                            Authorization: 'Token' + TOKEN,
+                        }
+                    })
+                    .then((response) => {
+                        const result = JSON.parse(response.data.result)
+                        state.commit('UPDATE_RESPONSE_RESULT', result)
+                    })
                 }
             }
         })
     },
     
     updateCheckedAnswers ({commit}, choices) {
-        console.log(choices)
         if(choices.checked) {
             commit('UPDATE_CHECKED_ANSWERS', choices.id)
         } else {
@@ -100,7 +101,6 @@ const actions = {
         const questionID = this.getters.question.id
         let formData = new FormData();
         formData.append('file', this.file);
-        console.log(formData)
         axios({
             method: 'post',
             url: VALIDATE_URL + answerPaperId + "/" + questionID + "/",
@@ -128,7 +128,7 @@ const getters = {
         // for(const [key, value] of Object.entries(state.result)){
         //     console.log(key, value)
         // }
-    }
+    },
 };
 
 const contentModule = {

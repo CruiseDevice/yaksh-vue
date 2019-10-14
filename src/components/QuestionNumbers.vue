@@ -1,7 +1,7 @@
 <template>
     <div>
-        <div class="question_numbers" v-for="question in questions.questions" :key="question.id">
-            <button @click="showQuestion(question)" class="btn btn-outline-success">{{question.id}}</button>
+        <div class="question_numbers" v-for="(question, index) in questions.questions" :key="question.id">
+            <button @click="showQuestion(question)" class="btn btn-outline-success">{{index+1}}</button>
         </div>
     </div>
 </template>

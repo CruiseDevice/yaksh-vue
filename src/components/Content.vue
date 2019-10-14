@@ -12,43 +12,6 @@
             </div>
             <div class="card" >
                 <div class="card-body">
-<!--                     <form @submit="submitForm">
-                        <input type="number" name="" :value="answer" v-if="question.type=='integer' || question.type=='float'">
-                        <textarea v-if="question.type=='string'" :value="answer"></textarea>
-                        <div class="form-group" v-if="question.type=='code'">
-
-                             <textarea id="editor" v-if="question.type=='code'"></textarea> //comment this line.
-
-                            <textarea id="codemirror1" :value="answer"></textarea>
-                        </div>
-                        <input type="file" v-if="question.type=='upload'" ref="file" @change="handleFileUpload()" id="file" name="">
-                        <div v-if="question.type=='mcc'">
-                            <div v-for="testcases in question.test_cases" :key="testcases.id">
-                                <input type="checkbox" :value="testcases.id" name=""> {{testcases.options}}
-                            </div>
-                        </div>
-                        <div v-if="question.type=='mcq'">
-                            <div v-for="testcases in question.test_cases" :key="testcases.id">
-                                <input type="radio" :value="testcases.id" name=""> {{testcases.options}}
-                            </div>
-                        </div>
-                        <div v-if="question.type=='arrange'">
-                            <draggable :value="question.test_cases" @start="drag=true" @end="drag=false">
-                                <div v-for="testcases in question.test_cases" :key="testcases.id">
-                                    <ul class="list-group">
-                                        <li class="list-group-item">
-                                            {{testcases.options}}
-                                        </li>
-                                    </ul>
-                                </div>
-                            </draggable>
-                        </div>
-                        <br>
-                        <br>
-                        <button v-if="question.type=='upload'" v-on:click="submitFile()" class="btn btn-success">Upload</button>
-                        <button v-else class="btn btn-success">Submit</button>
-                        <button class="btn btn-primary">Attempt Later</button>
-                    </form> -->
                     <form @submit="submitForm">
                         <input ref="answer" v-if="question.type=='integer' || question.type=='float'">
                         <textarea v-if="question.type=='string'" ref="answer"></textarea>
@@ -83,33 +46,7 @@
                         <button class="btn btn-primary">Attempt Later</button>
                     </form>
                 </div>
-            </div>
-            <div>
-            </div>
-            <div class="card" v-for='(error, index) in result.error'>
-                <div class="card-header alert-danger">Error No. {{index+1}}</div>
-                <div class="card-body">
-                    <p>The Following error took place: </p>
-                    <table class="table table-borderless border border-danger table-responsive-sm" width="100%">
-                        <col width="30%">
-                        <tr class="bg-light">
-                            <td><b>Exception Name: </b></td>
-                            <td><span class="text-danger">{{error.exception}}</span></td>
-                        </tr>
-                        <tr>
-                            <td><b>Exception Message:</b></td>
-                            <td>{{error.message}}</td>
-                        </tr>
-                        <tr>
-                            <td><b>Full Trace:</b></td>
-                            <td>{{error.traceback}}</td>
-                        </tr>
-                        <tr>
-                            <td><strong> We tried your code with the following test case:</strong></td>
-                            <td>{{error.test_case}}</td>
-                        </tr>
-                    </table>
-                </div>
+                <Error :result="result"/>
             </div>
         </div>
     </div>
@@ -119,17 +56,23 @@
 /* eslint-disable */
 import {mapGetters, mapActions, mapState} from 'vuex'
 import draggable from 'vuedraggable'
+import Error from './Error'
 
 export default {
     name: 'Content',
     computed: {
-        ...mapGetters(['question', 'answer', 'result', 'check_result', 'resultMessage']),
+        ...mapGetters([
+            'question',
+            'answer',
+            'result',
+            'check_result',
+            'resultMessage',
+        ]),
     },
     created () {
         this.$store.dispatch('showQuestion')
     },
     methods: {
-        ...mapActions(['handleFileUpload', 'submitForm']),
         submitForm (e) {
             e.preventDefault()
             if(this.question.type === 'mcc'){
@@ -161,6 +104,7 @@ export default {
     },
     components: {
         draggable,
+        Error,
     },
 }
 </script>
