@@ -9,33 +9,13 @@
           </div>
       </div>
     </nav>
-    <div class="wrapper">
-      <!-- <Sidebar :questions="questions"/> -->
-      <Sidebar />
-      <Content/>
-    </div>
+    <router-view/>
   </div>
 </template>
 
 <script>
-/* eslint-disable */
-import Sidebar from './components/Sidebar'
-import Content from './components/Content'
-
 export default {
   name: 'App',
-  components: {
-    Sidebar,
-    Content
-  }
 }
 </script>
 
-<style scoped>
-.wrapper {
-    display: flex;
-    width: 100%;
-    align-items: stretch;
-    perspective: 1500px;
-}
-</style>
