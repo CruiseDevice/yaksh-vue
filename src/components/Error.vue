@@ -1,5 +1,10 @@
 <template>
     <div>
+        <div class="card">
+            <div class="card-body">
+                <p>{{showSuccessMessage}}</p>
+            </div>
+        </div>
         <div class="card" v-for='(error, index) in result.error' :key="index">
             <div class="card-header alert-danger">Error No. {{index+1}}</div>
             <div class="card-body">
@@ -32,5 +37,13 @@
 export default {
     name: 'Error',
     props: ['result'],
+    computed: {
+        showSuccessMessage () {
+            if (this.result.success) {
+                const message = 'Submitted successfully'
+                return message
+            }
+        }
+    }
 }
 </script>
