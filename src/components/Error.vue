@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="card" v-for='(error, index) in result.error'>
+        <div class="card" v-for='(error, index) in result.error' :key="index">
             <div class="card-header alert-danger">Error No. {{index+1}}</div>
             <div class="card-body">
                 <p>The Following error took place: </p>
