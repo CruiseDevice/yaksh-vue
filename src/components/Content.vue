@@ -16,7 +16,7 @@
                         <input ref="answer" v-if="question.type=='integer' || question.type=='float'">
                         <textarea v-if="question.type=='string'" ref="answer"></textarea>
                         <div class="form-group" v-if="question.type=='code'">
-                            <textarea id="codemirror1" ref="answer"></textarea>
+                            <textarea id="codemirror1" ref="answer" rows="10" cols="50" :key="question.id"></textarea>
                         </div>
                         <div v-if="question.type=='mcq'">
                             <div v-for="testcases in question.test_cases" :key="testcases.id">
