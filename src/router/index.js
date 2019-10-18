@@ -4,6 +4,8 @@ import HelloWorld from '@/components/HelloWorld'
 import Courses from '@/components/Courses'
 import Quiz from '../components/Quiz.vue'
 
+/* eslint-disable */
+
 Vue.use(Router)
 
 export default new Router({

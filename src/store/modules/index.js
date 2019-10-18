@@ -4,6 +4,7 @@ import Vuex from 'vuex';
 
 import sidebar from './sidebar/index.js';
 import content from './content/index.js';
+import courses from './courses/index.js';
 
 Vue.use(Vuex);
 
@@ -11,5 +12,6 @@ export default new Vuex.Store({
     modules: {
         sidebar,
         content,
+        courses
     }
 });
