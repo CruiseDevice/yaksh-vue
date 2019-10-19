@@ -7,11 +7,11 @@
                         <h4 class="card-title"><b>{{course.name}} by {{course.creator}}</b></h4>
                     </a>
                     <p class="card-text">{{moment(course.start_enroll_time)}} to {{moment(course.end_enroll_time)}}</p>
-                    <b-button v-b-toggle.collapse-2 class="m-1">DETAILS</b-button>
+                    <b-button v-b-toggle="'collapse-'+index" class="m-1">DETAILS</b-button>
                     <a href="#" class="btn btn-primary">Download Course</a>
                     <a href="#" class="btn btn-success">Continue</a>
                 </div>
-                <b-collapse id="collapse-2">
+                <b-collapse :id="'collapse-'+index">
                     <div class="card-header">
                         {{course.name}} by {{course.creator}}
                     </div>
