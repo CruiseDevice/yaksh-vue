@@ -5,13 +5,13 @@ const validate_url = "http://localhost:8000/api/validate/"
 const TOKEN = "8ebb5a54048458a8bd73da259391a092c6627f1d"
 
 const state = {
-    courses: []
+    courses: [],
 };
 
 const mutations = {
     UPDATE_COURSES(state, payload) {
         state.courses = payload
-    }
+    },
 };
 
 const actions = {
@@ -25,20 +25,16 @@ const actions = {
             }
         })
         .then((response) => {
-            console.log(response.data)
             const courses = response.data
             commit('UPDATE_COURSES', courses)
         })
-    }
+    },
 };
 
 const getters = {
     courses: state => {
         return state.courses
     },
-    learning_module: state => {
-        return state.courses[0]["learning_module"][0].description
-    }
 };
 
 const coursesModule = {

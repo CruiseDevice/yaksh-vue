@@ -1,7 +1,7 @@
 <template>
     <div>
         <center><h2>Enrolled Courses</h2></center>
-        <div v-for="(course, index) in courses" :key="index">
+        <div v-for="(course, index) in courses" :key="course.id">
             <div class="card">
                 <div class="card-body text-center">
                     <a href="#">
@@ -9,7 +9,7 @@
                     </a>
                     <p class="card-text">{{moment(course.start_enroll_time)}} to {{moment(course.end_enroll_time)}}</p>
                     <b-button v-b-toggle="'collapse-'+index" class="m-1">DETAILS</b-button>
-                    <a href="#" class="btn btn-success">Continue</a>
+                    <router-link :to="'CourseModules'" class="btn btn-success">Continue</router-link>
                 </div>
                 <b-collapse :id="'collapse-'+index">
                     <div class="card-header">
@@ -24,7 +24,7 @@
                                 <th>ENDS ON</th>
                             </tr>
                             <tr>
-                                <td v-html="learning_module"></td>
+                                <td v-html="get_learning_module(course)"></td>
                                 <td>{{moment(course.start_enroll_time)}}</td>
                                 <td>{{course.creator}}</td>
                                 <td>{{moment(course.end_enroll_time)}}</td>
@@ -38,7 +38,7 @@
 </template>
 <script>
 /* eslint-disable */
-import {mapGetters} from 'vuex'
+import {mapGetters, mapActions} from 'vuex'
 
 export default {
     name: 'Courses',
@@ -49,7 +49,16 @@ export default {
         ...mapGetters([
                 'courses',
                 'learning_module'
-            ])
+            ]),
+    },
+    methods: {
+        get_learning_module: course => {
+            if (course.learning_module["0"] === undefined) {
+                return "No Module Found"
+            } else {
+                return course.learning_module["0"].description
+            }
+        }
     }
 }
 </script>

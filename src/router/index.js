@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
 import Courses from '@/components/Courses'
 import Quiz from '../components/Quiz.vue'
+import CourseModules from '@/components/CourseModules'
 
 /* eslint-disable */
 
@@ -25,6 +26,11 @@ export default new Router({
         path: '/quiz/start',
         name: 'Quiz',
         component: Quiz
+    },
+    {
+      path: 'courses/course-modules/',
+      name: 'CourseModules',
+      component: CourseModules
     }
   ]
 })
