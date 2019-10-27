@@ -8,14 +8,13 @@
                     </a>
                     <p class="card-text">{{moment(course.start_enroll_time)}} to {{moment(course.end_enroll_time)}}</p>
                     <b-button v-b-toggle="'collapse-'+index" class="m-1">DETAILS</b-button>
-                    <a href="#" class="btn btn-primary">Download Course</a>
                     <a href="#" class="btn btn-success">Continue</a>
                 </div>
                 <b-collapse :id="'collapse-'+index">
                     <div class="card-header">
                         {{course.name}} by {{course.creator}}
                     </div>
-                    <div class="card-body">
+                    <div class="card-body text-center">
                         <table class="table">
                             <tr>
                                 <th>What you'll learn</th>
@@ -60,7 +59,7 @@ export default {
     margin: 0 auto;
     float: none;
     margin-bottom: 10px;
-    margin-top: 10em;
+    margin-top: 1em;
 }
 
 </style>
