@@ -1,5 +1,6 @@
 <template>
     <div>
+        <center><h2>Enrolled Courses</h2></center>
         <div v-for="(course, index) in courses" :key="index">
             <div class="card">
                 <div class="card-body text-center">
