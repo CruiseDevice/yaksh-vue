@@ -1,7 +1,7 @@
 <template>
     <div>
         <center><h2>Enrolled Courses</h2></center>
-        <div v-for="(course, index) in courses" :key="index">
+        <div v-for="(course, index) in courses" :key="course.id">
             <div class="card">
                 <div class="card-body text-center">
                     <a href="#">
@@ -9,27 +9,29 @@
                     </a>
                     <p class="card-text">{{moment(course.start_enroll_time)}} to {{moment(course.end_enroll_time)}}</p>
                     <b-button v-b-toggle="'collapse-'+index" class="m-1">DETAILS</b-button>
-                    <a href="#" class="btn btn-success">Continue</a>
+                    <router-link :to="'CourseModules'" class="btn btn-success">Continue</router-link>
                 </div>
                 <b-collapse :id="'collapse-'+index">
                     <div class="card-header">
                         {{course.name}} by {{course.creator}}
                     </div>
-                    <div class="card-body text-center">
-                        <table class="table">
-                            <tr>
-                                <th>What you'll learn</th>
-                                <th>STARTS ON:</th>
-                                <th>Instructor</th>
-                                <th>ENDS ON</th>
-                            </tr>
-                            <tr>
-                                <td v-html="learning_module"></td>
-                                <td>{{moment(course.start_enroll_time)}}</td>
-                                <td>{{course.creator}}</td>
-                                <td>{{moment(course.end_enroll_time)}}</td>
-                            </tr>
-                        </table>
+                    <div class="card-body">
+                        <div class="card-text">
+                            <strong><u>What you'll learn Instructor</u>:</strong>
+                        </div>
+                        <div>
+                            <div v-for="(learning_module, index) in get_learning_module(course)" :key="index">
+                                <li class="li_learning_module">{{learning_module}}</li>
+                            </div><br>
+                            <div>
+                                <strong><u>Course Instructor</u>:</strong><br>
+                                <p class="instructor">{{course.creator}}</p>
+                            </div>
+                            <div>
+                                <strong><u>Course Instructions</u>:</strong><br>
+                                <div v-html="course.instructions"></div>
+                            </div>
+                        </div>
                     </div>
                 </b-collapse>
             </div>
@@ -37,30 +39,43 @@
     </div>
 </template>
 <script>
-/* eslint-disable */
 import {mapGetters} from 'vuex'
 
 export default {
-    name: 'Courses',
-    created () {
-        this.$store.dispatch('fetchCourses')
-    },
-    computed: {
-        ...mapGetters([
-                'courses',
-                'learning_module'
-            ])
+  name: 'Courses',
+  created () {
+    this.$store.dispatch('fetchCourses')
+  },
+  computed: {
+    ...mapGetters([
+      'courses',
+      'learning_module'
+    ])
+  },
+  methods: {
+    get_learning_module: course => {
+      console.log(course)
+      if (course.learning_module.length === 0) {
+        return ['No Module Found']
+      } else {
+        return course.learning_module.map(function (module) {
+          return module.name
+        })
+      }
     }
+  }
 }
 </script>
 
 <style>
 .card {
-    width: 48rem;
-    margin: 0 auto;
-    float: none;
-    margin-bottom: 10px;
-    margin-top: 1em;
+  width: 48rem;
+  margin: 0 auto;
+  float: none;
+  margin-bottom: 10px;
+  margin-top: 1em;
 }
-
+.li_learning_module, .instructor {
+  padding-left: 1.5em;
+}
 </style>
