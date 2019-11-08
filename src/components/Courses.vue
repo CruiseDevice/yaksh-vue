@@ -9,7 +9,7 @@
                     </a>
                     <p class="card-text">{{moment(course.start_enroll_time)}} to {{moment(course.end_enroll_time)}}</p>
                     <b-button v-b-toggle="'collapse-'+index" class="m-1">DETAILS</b-button>
-                    <router-link :to="'CourseModules'" class="btn btn-success">Continue</router-link>
+                    <router-link :to="`/courses/course-module/${course.id}`" class="btn btn-success">Continue</router-link>
                 </div>
                 <b-collapse :id="'collapse-'+index">
                     <div class="card-header">
@@ -54,7 +54,6 @@ export default {
   },
   methods: {
     get_learning_module: course => {
-      console.log(course)
       if (course.learning_module.length === 0) {
         return ['No Module Found']
       } else {

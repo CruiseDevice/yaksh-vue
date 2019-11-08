@@ -1,12 +1,10 @@
 /* eslint-disable */
 import axios from 'axios'
 
-// import {VALIDATE_URL, TOKEN}  from './../../../../config/dev.env.js'
 
 const VALIDATE_URL = "http://localhost:8000/api/validate/"
 const TOKEN = "8ebb5a54048458a8bd73da259391a092c6627f1d" //"d88812ee582e2ab6bb0cdd93faa600541a2bcb39"
 
-// console.log(VALIDATE_URL, TOKEN)
 
 const state = {
     question: undefined,
@@ -123,11 +121,6 @@ const getters = {
     result: state => state.result,
     check_result: state => {
         return typeof state.result !== 'undefined' && state.result.length > 0
-    },
-    resultMessage: state => {
-        // for(const [key, value] of Object.entries(state.result)){
-        //     console.log(key, value)
-        // }
     },
 };
 

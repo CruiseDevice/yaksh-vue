@@ -25,6 +25,7 @@ const actions = {
       .then((response) => {
         const courses = response.data
         commit('UPDATE_COURSES', courses)
+        localStorage.setItem('courses', JSON.stringify(courses))
       })
   }
 }

@@ -3,9 +3,7 @@ import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
 import Courses from '@/components/Courses'
 import Quiz from '../components/Quiz.vue'
-import CourseModules from '@/components/CourseModules'
-
-/* eslint-disable */
+import CourseModule from '@/components/CourseModule'
 
 Vue.use(Router)
 
@@ -18,19 +16,19 @@ export default new Router({
       component: HelloWorld
     },
     {
-        path: '/courses',
-        name: 'Courses',
-        component: Courses
+      path: '/courses',
+      name: 'Courses',
+      component: Courses
     },
     {
-        path: '/quiz/start',
-        name: 'Quiz',
-        component: Quiz
+      path: '/quiz/start',
+      name: 'Quiz',
+      component: Quiz
     },
     {
-      path: 'courses/course-modules/',
-      name: 'CourseModules',
-      component: CourseModules
+      path: '/courses/course-module/:id',
+      name: 'CourseModule',
+      component: CourseModule
     }
   ]
 })
