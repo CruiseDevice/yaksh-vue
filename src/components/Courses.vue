@@ -15,21 +15,23 @@
                     <div class="card-header">
                         {{course.name}} by {{course.creator}}
                     </div>
-                    <div class="card-body text-center">
-                        <table class="table">
-                            <tr>
-                                <th>What you'll learn</th>
-                                <th>STARTS ON:</th>
-                                <th>Instructor</th>
-                                <th>ENDS ON</th>
-                            </tr>
-                            <tr>
-                                <td v-html="get_learning_module(course)"></td>
-                                <td>{{moment(course.start_enroll_time)}}</td>
-                                <td>{{course.creator}}</td>
-                                <td>{{moment(course.end_enroll_time)}}</td>
-                            </tr>
-                        </table>
+                    <div class="card-body">
+                        <div class="card-text">
+                            <strong><u>What you'll learn Instructor</u>:</strong>
+                        </div>
+                        <div>
+                            <div v-for="(learning_module, index) in get_learning_module(course)" :key="index">
+                                <li class="li_learning_module">{{learning_module}}</li>
+                            </div><br>
+                            <div>
+                                <strong><u>Course Instructor</u>:</strong><br>
+                                <p class="instructor">{{course.creator}}</p>
+                            </div>
+                            <div>
+                                <strong><u>Course Instructions</u>:</strong><br>
+                                <div v-html="course.instructions"></div>
+                            </div>
+                        </div>
                     </div>
                 </b-collapse>
             </div>
@@ -37,39 +39,43 @@
     </div>
 </template>
 <script>
-/* eslint-disable */
-import {mapGetters, mapActions} from 'vuex'
+import {mapGetters} from 'vuex'
 
 export default {
-    name: 'Courses',
-    created () {
-        this.$store.dispatch('fetchCourses')
-    },
-    computed: {
-        ...mapGetters([
-                'courses',
-                'learning_module'
-            ]),
-    },
-    methods: {
-        get_learning_module: course => {
-            if (course.learning_module["0"] === undefined) {
-                return "No Module Found"
-            } else {
-                return course.learning_module["0"].description
-            }
-        }
+  name: 'Courses',
+  created () {
+    this.$store.dispatch('fetchCourses')
+  },
+  computed: {
+    ...mapGetters([
+      'courses',
+      'learning_module'
+    ])
+  },
+  methods: {
+    get_learning_module: course => {
+      console.log(course)
+      if (course.learning_module.length === 0) {
+        return ['No Module Found']
+      } else {
+        return course.learning_module.map(function (module) {
+          return module.name
+        })
+      }
     }
+  }
 }
 </script>
 
 <style>
 .card {
-    width: 48rem;
-    margin: 0 auto;
-    float: none;
-    margin-bottom: 10px;
-    margin-top: 1em;
+  width: 48rem;
+  margin: 0 auto;
+  float: none;
+  margin-bottom: 10px;
+  margin-top: 1em;
 }
-
+.li_learning_module, .instructor {
+  padding-left: 1.5em;
+}
 </style>
