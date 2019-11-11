@@ -1,6 +1,6 @@
 <template>
   <div>
-    {{module_}}
+    {{module}}
   </div>
 </template>
 <script>
@@ -10,14 +10,14 @@ export default {
   name: 'CourseModules',
   created () {
     console.log(this.$route.params.id)
-    const courses = this.courses_
+    const courses = this.courses
     const courseId = this.$route.params.id
     this.$store.dispatch('fetchModule', {courses, courseId})
   },
   computed: {
     ...mapGetters([
-      'courses_',
-      'module_'
+      'courses',
+      'module'
     ])
   }
 }

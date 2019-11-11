@@ -8,11 +8,16 @@ import App from './App'
 import router from './router'
 import store from './store/modules'
 import moment from 'moment'
+import * as filters from './filter'
 
 Vue.prototype.moment = moment
 Vue.use(BootstrapVue)
 
 Vue.config.productionTip = false
+
+for (const key in filters) {
+  Vue.filter(key, filters[key])
+}
 
 /* eslint-disable no-new */
 new Vue({

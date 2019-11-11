@@ -7,7 +7,7 @@
                     <a href="#">
                         <h4 class="card-title"><b>{{course.name}} by {{course.creator}}</b></h4>
                     </a>
-                    <p class="card-text">{{moment(course.start_enroll_time)}} to {{moment(course.end_enroll_time)}}</p>
+                    <p class="card-text">{{course.start_enroll_time | date}} to {{course.end_enroll_time | date}}</p>
                     <b-button v-b-toggle="'collapse-'+index" class="m-1">DETAILS</b-button>
                     <router-link :to="`/courses/course-module/${course.id}`" class="btn btn-success">Continue</router-link>
                 </div>
