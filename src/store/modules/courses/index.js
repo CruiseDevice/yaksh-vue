@@ -4,7 +4,8 @@ const TOKEN = '8ebb5a54048458a8bd73da259391a092c6627f1d'
 
 const state = {
   courses: JSON.parse(localStorage.getItem('courses')) || [],
-  module: []
+  course: null,
+  modules: JSON.parse(localStorage.getItem('modules')) || []
 }
 
 const mutations = {
@@ -12,8 +13,12 @@ const mutations = {
     state.courses = payload
   },
 
-  UPDATE_MODULE (state, payload) {
-    state.module = payload
+  UPDATE_COURSE (state, payload) {
+    state.course = payload
+  },
+
+  UPDATE_MODULES (state, payload) {
+    state.modules = payload
   }
 }
 
@@ -34,15 +39,31 @@ const actions = {
       })
   },
 
-  fetchModule (state, payload) {
-    const module = payload.courses[payload.courseId - 1]
-    state.commit('UPDATE_MODULE', module)
+  fetchCourse (state, payload) {
+    const course = payload.courses[payload.courseId - 1]
+    state.commit('UPDATE_COURSE', course)
+  },
+
+  getModules (state) {
+    const course = state.getters.course
+    const modules = course.learning_module
+    state.commit('UPDATE_MODULES', modules)
+    localStorage.setItem('modules', JSON.stringify(modules))
   }
 }
 
 const getters = {
   courses: state => state.courses,
-  module: state => state.module
+  course: state => state.course,
+  modules: state => state.modules,
+  modulesExists: state => state.modules.length !== 0,
+  unitExists: state => {
+    const exists = state.modules.map(function (module_) {
+      console.log(module_)
+      return module_.learning_unit.length !== 0
+    })
+    return exists
+  }
 }
 
 const coursesModule = {

@@ -1,13 +1,13 @@
 <template>
     <div>
         <center><h2>Enrolled Courses</h2></center>
-        <div v-for="(course, index) in courses" :key="course.id">
+          <div v-for="(course, index) in courses" :key="course.id">
             <div class="card">
                 <div class="card-body text-center">
                     <a href="#">
                         <h4 class="card-title"><b>{{course.name}} by {{course.creator}}</b></h4>
                     </a>
-                    <p class="card-text">{{course.start_enroll_time | date}} to {{course.end_enroll_time | date}}</p>
+                    <p class="card-text"><span class="course-time">{{course.start_enroll_time | date}}</span>  to  <span class="course-time">{{course.end_enroll_time | date}}</span></p>
                     <b-button v-b-toggle="'collapse-'+index" class="m-1">DETAILS</b-button>
                     <router-link :to="`/courses/course-module/${course.id}`" class="btn btn-success">Continue</router-link>
                 </div>
@@ -20,7 +20,7 @@
                             <strong><u>What you'll learn Instructor</u>:</strong>
                         </div>
                         <div>
-                            <div v-for="(learning_module, index) in get_learning_module(course)" :key="index">
+                            <div v-for="(learning_module, index) in getLearningModule(course)" :key="index">
                                 <li class="li_learning_module">{{learning_module}}</li>
                             </div><br>
                             <div>
@@ -53,7 +53,7 @@ export default {
     ])
   },
   methods: {
-    get_learning_module: course => {
+    getLearningModule: course => {
       if (course.learning_module.length === 0) {
         return ['No Module Found']
       } else {
@@ -74,7 +74,13 @@ export default {
   margin-bottom: 10px;
   margin-top: 1em;
 }
+
 .li_learning_module, .instructor {
   padding-left: 1.5em;
+}
+
+.course-time {
+    color: black;
+    padding: 1em;
 }
 </style>
