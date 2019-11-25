@@ -9,7 +9,7 @@
           <div class="card-body text-center">
             <h5>{{module_.name}}</h5>
             <b-button v-b-toggle="'collapse-'+index" class="m-1">DETAILS</b-button>
-            <router-link :to="`#`" class="btn btn-success">START</router-link>
+            <router-link :to="`/course/${course.id}/view-module/${module_.id}`" class="btn btn-success">START</router-link>
           </div>
           <b-collapse :id="'collapse-'+index">
             <div class="card-body">
@@ -18,10 +18,10 @@
                     <!-- {{module_.learning_unit}} -->
                     <div v-for="unit in module_.learning_unit" :key="unit.id">
                       <div v-if="quizExists(unit.quiz)">
-                        {{unit.quiz.description}}
+                        <center>{{unit.quiz.description}}</center>
                       </div>
                       <div v-if="lessonExists(unit.lesson)">
-                        {{unit.lesson.name}}
+                        <center>{{unit.lesson.name}}</center>
                       </div>
                     </div>
                   </div>
@@ -46,7 +46,7 @@ export default {
   name: 'CourseModules',
   created () {
     const courses = this.courses
-    const courseId = this.$route.params.id
+    const courseId = this.$route.params.course_id
     this.$store.dispatch('fetchCourse', {courses, courseId})
     this.$store.dispatch('getModules')
   },

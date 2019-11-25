@@ -59,7 +59,6 @@ const getters = {
   modulesExists: state => state.modules.length !== 0,
   unitExists: state => {
     const exists = state.modules.map(function (module_) {
-      console.log(module_)
       return module_.learning_unit.length !== 0
     })
     return exists

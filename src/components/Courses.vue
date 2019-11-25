@@ -9,7 +9,7 @@
                     </a>
                     <p class="card-text"><span class="course-time">{{course.start_enroll_time | date}}</span>  to  <span class="course-time">{{course.end_enroll_time | date}}</span></p>
                     <b-button v-b-toggle="'collapse-'+index" class="m-1">DETAILS</b-button>
-                    <router-link :to="`/courses/course-module/${course.id}`" class="btn btn-success">Continue</router-link>
+                    <router-link :to="`/course/${course.id}`" class="btn btn-success">Continue</router-link>
                 </div>
                 <b-collapse :id="'collapse-'+index">
                     <div class="card-header">

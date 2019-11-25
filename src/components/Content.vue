@@ -127,4 +127,12 @@ export default {
   z-index: 999;
   height: auto;
 }
+
+.card {
+  width: 48rem;
+  margin: 0 auto;
+  float: none;
+  margin-bottom: 10px;
+  margin-top: 1em;
+}
 </style>
