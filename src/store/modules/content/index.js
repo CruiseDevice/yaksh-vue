@@ -7,7 +7,7 @@ const TOKEN = "8ebb5a54048458a8bd73da259391a092c6627f1d" //"d88812ee582e2ab6bb0c
 
 
 const state = {
-    question: undefined,
+    question: JSON.parse(localStorage.getItem('question')) || undefined,
     answer: [],
     file: '',
     result: [],
@@ -45,6 +45,7 @@ const actions = {
         this.state.content.result = []
         this.state.content.answer = []
         commit('UPDATE_QUESTION', question)
+        localStorage.setItem('question', JSON.stringify(question))
     },
     
     checkAnswerStatus (response) {

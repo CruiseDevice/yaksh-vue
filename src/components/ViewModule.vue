@@ -4,6 +4,7 @@
     </div>
 </template>
 <script>
+/* eslint-disable */
 import Sidebar from './Sidebar'
 
 export default {

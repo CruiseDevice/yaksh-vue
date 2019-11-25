@@ -34,7 +34,6 @@ const actions = {
             }
         })
         .then((response) => {
-            console.log(response)
             commit('UPDATE_SELECTED_QUESTION', response)
         });
     },
@@ -42,7 +41,11 @@ const actions = {
 
 const getters = {
     getquestions: state => state.questions,
-    questionsExists: state => state.questions.length !== 0 
+    questionsExists: state => state.questions.length !== 0,
+    firstQuestion: state => {
+        const questions = state.questions.questions
+        return questions
+    }
 };
 
 const sidebarModule = {

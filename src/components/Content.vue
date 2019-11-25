@@ -67,10 +67,8 @@ export default {
             'result',
             'check_result',
             'resultMessage',
+            'getquestions'
         ]),
-    },
-    created () {
-        this.$store.dispatch('showQuestion')
     },
     methods: {
         submitForm (e) {
