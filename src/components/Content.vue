@@ -67,10 +67,8 @@ export default {
             'result',
             'check_result',
             'resultMessage',
+            'getquestions'
         ]),
-    },
-    created () {
-        this.$store.dispatch('showQuestion')
     },
     methods: {
         submitForm (e) {
@@ -126,5 +124,13 @@ export default {
   position: relative;
   z-index: 999;
   height: auto;
+}
+
+.card {
+  width: 48rem;
+  margin: 0 auto;
+  float: none;
+  margin-bottom: 10px;
+  margin-top: 1em;
 }
 </style>

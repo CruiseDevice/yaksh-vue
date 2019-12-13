@@ -2,10 +2,11 @@
     <div>
         <nav id="sidebar">
             <div class="sidebar-header">
-                <h3>Quiz Name</h3>
+                <h3>Course Name</h3>
             </div>
             <QuestionNumbers
-            :questions="getquestions"/>
+            :questions="getquestions"
+            />
         </nav>
     </div>
 </template>
@@ -18,21 +19,30 @@ import axios from 'axios'
 
 export default {
   name: 'Sidebar',
-  data() {
-    return {
-      questions: []
-    }
-  },
   components: {
     QuestionNumbers
   },
   computed: {
     ...mapGetters([
-            'getquestions'
+            'getquestions',
+            'questionsExists',
+            'firstQuestion',
+            'question'
         ])
   },
-  created() {
-    this.$store.dispatch('fetchQuizQuestion')
+  created () {
+    const course_id = this.$route.params.course_id
+    const quiz_id = this.$route.params.quiz_id
+    const payload = {course_id, quiz_id}
+    this.$store.dispatch('fetchQuizQuestion', payload)
+  },
+  updated () {
+    console.log(this.question)
+    if (this.question === undefined) {
+        this.$store.dispatch('showQuestion', this.firstQuestion[0])
+    } else {
+        this.$store.dispatch('showQuestion', this.question)
+    }
   }
 
 }
