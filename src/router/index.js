@@ -27,7 +27,7 @@ export default new Router({
       component: CourseModule
     },
     {
-      path: '/course/:course_id/view-module/:module_id',
+      path: '/course/:course_id/:module_id',
       name: 'ViewModule',
       component: ViewModule
     },

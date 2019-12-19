@@ -9,9 +9,9 @@ import courses from './courses/index.js'
 Vue.use(Vuex);
 
 export default new Vuex.Store({
-    modules: {
-        sidebar,
-        content,
-        courses,
-    }
+  modules: {
+    sidebar,
+    content,
+    courses,
+  }
 });

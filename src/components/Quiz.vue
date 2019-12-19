@@ -1,11 +1,11 @@
 <template>
-    <div>
-        <div class="wrapper">
-          <!-- <Sidebar :questions="questions"/> -->
-          <Sidebar />
-          <Content/>
-        </div>
+  <div>
+    <div class="wrapper">
+      <!-- <Sidebar :questions="questions"/> -->
+      <Sidebar />
+      <Content/>
     </div>
+  </div>
 </template>
 
 <script>
