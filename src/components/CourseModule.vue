@@ -9,7 +9,7 @@
           <div class="card-body text-center">
             <h5>{{module_.name}}</h5>
             <b-button v-b-toggle="'collapse-'+index" class="m-1">DETAILS</b-button>
-            <router-link :to="`/course/${course.id}/view-module/${module_.id}`" class="btn btn-success">START</router-link>
+            <router-link :to="`/course/${course.id}/${module_.id}`" class="btn btn-success">START</router-link>
           </div>
           <b-collapse :id="'collapse-'+index">
             <div class="card-body">
